@@ -1,15 +1,20 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Create the student object with getKeys as a method
-    const student = {
-        name: "John",
-        age: 20,
-        city: "New York",
-        getKeys: function () {
-            return Object.keys(this);
-        }
-    };
+// Create an object with a getKeys method
+const student = {
+    name: "John",
+    age: 20,
+    city: "New York",
+    
+    // Method to get all keys of the object
+    getKeys: function () {
+        return Object.keys(this).filter(key => key !== "getKeys"); 
+    }
+};
 
-    // Get the output element
+// Expose student for Cypress tests
+window.student = student;
+
+// Get the output element
+document.addEventListener("DOMContentLoaded", function () {
     const outputElement = document.getElementById("output");
 
     // Ensure the element exists before setting textContent
@@ -18,5 +23,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Log output in console for debugging
-    console.log(student.getKeys()); // Output: ["name", "age", "city", "getKeys"]
+    console.log(student.getKeys()); // Output: ["name", "age", "city"]
 });
